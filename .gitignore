@@ -1,0 +1,8 @@
+# NODE MODULES FOR BACKEND AND FRONTEND
+**/node_modules/
+**/nodemon.json
+
+# EVVIRONMENT VARIABLES
+**/.env
+
+# SYSTEM FILES

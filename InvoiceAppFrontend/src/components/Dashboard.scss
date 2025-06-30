@@ -1,0 +1,8 @@
+@use '../assets/styles/variables' as vars;
+
+.dashboard {
+	font-family: vars.$font-family-main;
+	padding: 3rem;
+	text-align: center;
+	color: vars.$color-text;
+}

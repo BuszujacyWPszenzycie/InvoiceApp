@@ -1,0 +1,31 @@
+const express = require('express') // import express
+const mongoose = require('mongoose') // import mongoose
+const cors = require('cors') // import cors
+const User = require('./models/User') // import user model from models/User.js
+
+const app = express() // create an express app
+app.use(cors()) // use cors middleware
+app.use(express.json()) // use express json middleware
+
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.hbc0z1i.mongodb.net/${process.env.MONGO_DATABASE}` //Connect to MongoDB using environment variables
+
+mongoose
+	.connect(MONGODB_URI) // connect to MongoDB
+	.then(() => console.log('MongoDB connected')) // log success message
+	.catch(err => console.error('MongoDB connection error:', err)) // log error message
+
+// create a new user instance
+app.post('/api/register', (req, res) => {
+	const { email, password, name } = req.body // destructure email, password, and name from request body
+	const newUser = new User({ email, password, name })
+	newUser
+		.save() // save the new user to the database
+		.then(() => {
+			res.status(201).json({ message: 'User registered successfully' }) // send success response
+		})
+		.catch(err => {
+			res.status(500).json({ error: 'Error registering user', details: err.message }) // send error response
+		})
+})
+
+app.listen(4000, () => console.log('✅ Server is running on http://localhost:4000')) // start the server on port 4000 and log success message
