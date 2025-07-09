@@ -1,18 +1,25 @@
 const express = require('express') // import express
 const mongoose = require('mongoose') // import mongoose
 const cors = require('cors') // import cors
-const User = require('./models/User') // import user model from models/User.js
+const User = require('./models/User') // import user model from models/User.
+const authRoutes = require('./routes/auth')
 
 const app = express() // create an express app
 app.use(cors()) // use cors middleware
 app.use(express.json()) // use express json middleware
 
+// Routing
+app.use('/api', authRoutes) // -> /api/login, /api/register
+
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.hbc0z1i.mongodb.net/${process.env.MONGO_DATABASE}` //Connect to MongoDB using environment variables
 
 mongoose
-	.connect(MONGODB_URI) // connect to MongoDB
-	.then(() => console.log('MongoDB connected')) // log success message
-	.catch(err => console.error('MongoDB connection error:', err)) // log error message
+	.connect(MONGODB_URI)
+	.then(() => console.log('MongoDB connected!'))
+	.catch(err => {
+		console.error('MongoDB connection error:', err.message)
+		console.error('Used URI:', MONGODB_URI) // UWAGA: NIE W PRODUKCJI, bo może logować hasło
+	})
 
 // create a new user instance
 app.post('/api/register', (req, res) => {

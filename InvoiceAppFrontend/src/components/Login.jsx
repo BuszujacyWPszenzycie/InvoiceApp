@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import './Login.scss'
 
-function Login() {
+function Login({ onLogin }) {
 	const [formData, setFormData] = useState({ email: '', password: '' })
 	const [error, setError] = useState('')
 
@@ -12,11 +13,19 @@ function Login() {
 
 	const handleSubmit = e => {
 		e.preventDefault()
+
 		if (!formData.email || !formData.password) {
 			setError('Wszystkie pola są wymagane.')
 			return
 		}
-		// tutaj później dodamy backendowe logowanie
+
+		axios.post('http://localhost:4000/api/login', formData).then(res => {
+			if (res.data.success) {
+				onLogin(res.data.user) // przekaż usera do rodzica
+			} else {
+				setError('Nieprawidłowy email lub hasło.')
+			}
+		})
 	}
 
 	return (
