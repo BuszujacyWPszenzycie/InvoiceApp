@@ -1,11 +1,19 @@
 import React from 'react'
-import './Dashboard.scss'
+import Sidebar from './Sidebar'
+import Header from './Header'
+import Panel from './Panel'
+import './Dashboard.scss' // plik stylów dla dashboardu
 
-export default function Dashboard() {
+function Dashboard({ user }) {
 	return (
 		<div className='dashboard'>
-			<h1>Witaj na stronie po zalogowaniu!</h1>
-			<p>Tu będzie Twój panel użytkownika.</p>
+			<Sidebar />
+			<div className='main-area'>
+				<Header user={user} />
+				<Panel />
+			</div>
 		</div>
 	)
 }
+
+export default Dashboard

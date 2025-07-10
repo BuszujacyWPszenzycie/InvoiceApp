@@ -1,8 +1,11 @@
-@use '../assets/styles/variables' as vars;
-
 .dashboard {
-	font-family: vars.$font-family-main;
-	padding: 3rem;
-	text-align: center;
-	color: vars.$color-text;
+	display: flex;
+	height: 100vh;
+	font-family: Arial, sans-serif;
+}
+
+.main-area {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 }
