@@ -1,0 +1,91 @@
+@use '../assets/styles/variables' as vars;
+
+.add-invoice {
+	padding: 2rem;
+	background-color: vars.$color-white;
+	border-radius: vars.$border-radius;
+	box-shadow: vars.$shadow-default;
+	max-width: 700px;
+	margin: 2rem auto;
+	font-family: vars.$font-family-main;
+
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 2rem;
+		color: vars.$color-text;
+		text-align: center;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.6rem;
+	}
+
+	.form-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+	}
+
+	.form-column {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+
+		label {
+			font-size: 1.4rem;
+			margin-bottom: 0.6rem;
+			color: vars.$color-text;
+		}
+
+		input {
+			padding: 0.8rem 1rem;
+			font-size: 1.6rem;
+			border: 1px solid vars.$color-border;
+			border-radius: vars.$border-radius;
+
+			&:focus {
+				border-color: vars.$color-primary;
+			}
+		}
+	}
+
+	.add-invoice__submit {
+		align-self: flex-end;
+		padding: 1rem 2rem;
+		font-size: 1.6rem;
+		background-color: vars.$color-primary;
+		color: vars.$color-white;
+		border: none;
+		border-radius: vars.$border-radius;
+		cursor: pointer;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: vars.$color-primary-hover;
+		}
+	}
+}
+
+.add-invoice__actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1.2rem;
+	margin-top: 2rem;
+}
+
+.add-invoice__cancel {
+	padding: 1rem 2rem;
+	font-size: 1.6rem;
+	background-color: vars.$color-error;
+	color: vars.$color-white;
+	border: none;
+	border-radius: vars.$border-radius;
+	cursor: pointer;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: vars.$color-error-hover;
+	}
+}

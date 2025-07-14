@@ -1,0 +1,40 @@
+@use '../../assets/styles/variables' as vars;
+
+.btn {
+	padding: 1rem 2rem;
+	font-size: 1.6rem;
+	border: none;
+	border-radius: vars.$border-radius;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	&--primary {
+		background-color: vars.$color-primary;
+		color: vars.$color-white;
+
+		&:hover {
+			background-color: vars.$color-primary-hover;
+		}
+	}
+
+	&--danger {
+		background-color: vars.$color-error;
+		color: vars.$color-white;
+
+		&:hover {
+			background-color: vars.$color-error-hover;
+		}
+	}
+
+	&--secondary {
+		background-color: vars.$color-border;
+		color: vars.$color-text;
+
+		&:hover {
+			background-color: vars.$color-border-hover;
+		}
+	}
+}

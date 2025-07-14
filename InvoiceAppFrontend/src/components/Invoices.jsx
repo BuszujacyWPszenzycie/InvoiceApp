@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Invoices.scss'
 import axios from 'axios'
+import FloatingButton from './FloatingButton'
 
 function Invoices() {
 	const [invoices, setInvoices] = useState([])
@@ -30,6 +31,7 @@ function Invoices() {
 					</li>
 				))}
 			</ul>
+			<FloatingButton to='/dashboard/invoices/new' />
 		</div>
 	)
 }

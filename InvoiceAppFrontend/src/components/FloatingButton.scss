@@ -1,0 +1,24 @@
+@use '../assets/styles/variables' as vars;
+
+.floating-button {
+	position: fixed;
+	right: 2.4rem;
+	bottom: 2.4rem;
+	width: 4.8rem;
+	height: 4.8rem;
+	border-radius: 50%;
+	background-color: vars.$color-primary;
+	color: vars.$color-white;
+	border: none;
+	box-shadow: vars.$shadow-default;
+	cursor: pointer;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: vars.$color-primary-hover;
+	}
+}

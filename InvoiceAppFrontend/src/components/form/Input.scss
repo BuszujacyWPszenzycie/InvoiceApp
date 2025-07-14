@@ -1,0 +1,40 @@
+@use '../../assets/styles/variables' as vars;
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.6rem;
+
+	label {
+		font-size: 1.4rem;
+		margin-bottom: 0.6rem;
+		color: vars.$color-text;
+	}
+
+	input {
+		padding: 0.8rem 1rem;
+		font-size: 1.6rem;
+		border: 1px solid vars.$color-border;
+		border-radius: vars.$border-radius;
+		outline: none;
+
+		&:focus {
+			border-color: vars.$color-primary;
+		}
+	}
+}
+
+.percent-wrapper {
+	display: flex;
+	align-items: center;
+
+	input {
+		flex: 1;
+	}
+
+	.percent-symbol {
+		margin-left: 0.6rem;
+		font-size: 1.4rem;
+		color: vars.$color-text;
+	}
+}
