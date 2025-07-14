@@ -1,0 +1,19 @@
+@use '../assets/styles/variables' as vars;
+
+.panel {
+	flex: 1;
+	padding: 2rem;
+	background-color: vars.$color-bg;
+	color: vars.$color-text;
+	overflow-y: auto;
+
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	p {
+		font-size: 1.4rem;
+	}
+}
+  

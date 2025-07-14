@@ -1,0 +1,27 @@
+@use '../assets/styles/variables' as vars;
+
+.invoices {
+	padding: 2rem;
+	color: vars.$color-text;
+	background-color: vars.$color-bg;
+
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	&__list {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		gap: 1.6rem;
+	}
+
+	&__item {
+		background-color: vars.$color-white;
+		box-shadow: vars.$shadow-default;
+		border-radius: vars.$border-radius;
+		padding: 1.6rem;
+		font-size: 1.4rem;
+	}
+}

@@ -3,10 +3,10 @@ import './Panel.scss'
 
 function Panel() {
 	return (
-		<main className='panel'>
-			<h1>Panel główny</h1>
-			<p>Tutaj będą wyświetlane faktury.</p>
-		</main>
+		<div className='panel'>
+			<h1>Witaj w panelu głównym</h1>
+			<p>Tu możesz dodać notatki, widżety, powiadomienia itp.</p>
+		</div>
 	)
 }
 

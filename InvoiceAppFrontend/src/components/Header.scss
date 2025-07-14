@@ -1,0 +1,18 @@
+@use '../assets/styles/variables' as vars;
+
+.header {
+	height: 60px;
+	background-color: vars.$color-white;
+	color: vars.$color-text;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2rem;
+	box-shadow: vars.$shadow-default;
+	border-bottom: 1px solid vars.$color-border;
+
+	.welcome {
+		font-size: 1.6rem;
+		font-weight: 500;
+	}
+}

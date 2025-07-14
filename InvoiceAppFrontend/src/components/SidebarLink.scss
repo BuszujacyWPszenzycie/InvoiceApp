@@ -1,0 +1,35 @@
+@use '../assets/styles/variables' as vars;
+
+.sidebar-link {
+	display: flex;
+	align-items: center;
+	padding: 1rem 1.6rem;
+	font-size: 1.5rem;
+	color: vars.$color-text;
+	text-decoration: none;
+	border-radius: vars.$border-radius;
+	transition: background-color 0.3s;
+	margin-bottom: 0.5rem;
+
+	&__icon {
+		margin-right: 1rem;
+		font-size: 1.6rem;
+	}
+
+	&__label {
+		flex: 1;
+	}
+
+	&:hover {
+		background-color: vars.$color-bg-hover;
+	}
+
+	&--active {
+		background-color: vars.$color-primary;
+		color: vars.$color-white;
+
+		.sidebar-link__icon {
+			color: vars.$color-white;
+		}
+	}
+}

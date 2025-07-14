@@ -1,8 +1,8 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
-import Panel from './Panel'
-import './Dashboard.scss' // plik stylów dla dashboardu
+import { Outlet } from 'react-router-dom'
+import './Dashboard.scss'
 
 function Dashboard({ user }) {
 	return (
@@ -10,7 +10,7 @@ function Dashboard({ user }) {
 			<Sidebar />
 			<div className='main-area'>
 				<Header user={user} />
-				<Panel />
+				<Outlet /> {/* <-- Tu będą dynamiczne komponenty: Panel, Invoices itd. */}
 			</div>
 		</div>
 	)

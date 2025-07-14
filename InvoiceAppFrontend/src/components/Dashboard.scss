@@ -1,9 +1,11 @@
+@use '../assets/styles/variables' as vars;
+
 .dashboard {
 	display: flex;
 	height: 100vh;
-	font-family: Arial, sans-serif;
+	background-color: vars.$color-bg;
+	font-family: vars.$font-family-main;
 }
-
 .main-area {
 	flex: 1;
 	display: flex;
