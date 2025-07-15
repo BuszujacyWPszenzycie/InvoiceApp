@@ -32,7 +32,24 @@ const addInvoice = (req, res) => {
 		})
 }
 
+const deleteInvoice = (req, res) => {
+	const { id } = req.params
+
+	Invoice.findByIdAndDelete(id)
+		.then(deleted => {
+			if (!deleted) {
+				return res.status(404).json({ error: 'Faktura nie znaleziona' })
+			}
+			res.status(200).json({ message: 'Faktura usunięta' })
+		})
+		.catch(err => {
+			console.error('Błąd usuwania faktury:', err)
+			res.status(500).json({ error: 'Błąd serwera podczas usuwania' })
+		})
+}
+
 module.exports = {
 	getInvoices,
 	addInvoice,
+	deleteInvoice,
 }
