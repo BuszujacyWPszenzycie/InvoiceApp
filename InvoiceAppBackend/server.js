@@ -4,6 +4,7 @@ const cors = require('cors') // import cors
 const User = require('./models/UserModel') // import user model from models/User.
 const authRoutes = require('./routes/authRoutes') // import auth routes
 const invoiceRoutes = require('./routes/invoicesRoutes')
+const clientRoutes = require('./routes/clientRoutes')
 
 const app = express() // create an express app
 app.use(cors()) // use cors middleware
@@ -12,6 +13,7 @@ app.use(express.json()) // use express json middleware
 // Routing
 app.use('/api', authRoutes) // -> /api/login, /api/register
 app.use('/api/invoices', invoiceRoutes) // -> /api/invoices/get, /api/invoices/add
+app.use('/api/clients', clientRoutes) // -> /api/clients/
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.hbc0z1i.mongodb.net/${process.env.MONGO_DATABASE}` //Connect to MongoDB using environment variables
 

@@ -2,7 +2,7 @@
 const User = require('../models/UserModel')
 
 // REGISTER
-exports.register = (req, res) => {
+const register = (req, res) => {
 	const { email, password, name } = req.body
 
 	const newUser = new User({ email, password, name })
@@ -14,7 +14,7 @@ exports.register = (req, res) => {
 }
 
 // LOGIN
-exports.login = (req, res) => {
+const login = (req, res) => {
 	const { email, password } = req.body
 
 	User.findOne({ email })
@@ -31,4 +31,9 @@ exports.login = (req, res) => {
 			res.status(200).json({ success: true, message: 'Login successful', user })
 		})
 		.catch(err => res.status(500).json({ error: 'Login failed', details: err.message }))
+}
+
+module.exports = {
+	register,
+	login,
 }

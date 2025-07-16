@@ -5,6 +5,8 @@ import Dashboard from './components/Dashboard'
 import Panel from './components/Panel'
 import Invoices from './components/Invoices'
 import AddInvoice from './components/AddInvoices'
+import Clients from './components/Clients'
+import AddClient from './components/AddClient'
 
 function App() {
 	const [user, setUser] = useState(null)
@@ -17,6 +19,8 @@ function App() {
 					<Route index element={<Panel />} />
 					<Route path='invoices' element={<Invoices />} />
 					<Route path='invoices/new' element={<AddInvoice />} /> {/* 👈 nowy widok */}
+					<Route path='clients' element={<Clients />} />
+					<Route path='clients/new' element={<AddClient />} />
 				</Route>
 			</Routes>
 		</Router>

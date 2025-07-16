@@ -1,6 +1,6 @@
 import React from 'react'
 import SidebarLink from './SidebarLink'
-import { FaHome, FaFileInvoice } from 'react-icons/fa'
+import { FaHome, FaFileInvoice, FaAddressBook } from 'react-icons/fa'
 import './Sidebar.scss'
 
 function Sidebar() {
@@ -10,6 +10,7 @@ function Sidebar() {
 			<nav className='sidebar__nav'>
 				<SidebarLink to='/dashboard' label='Panel główny' icon={FaHome} exact={true} />
 				<SidebarLink to='/dashboard/invoices' label='Faktury' icon={FaFileInvoice} />
+				<SidebarLink to='/dashboard/clients' icon={FaAddressBook} label='Kontrahenci' />
 			</nav>
 		</aside>
 	)
