@@ -3,6 +3,7 @@ const Invoice = require('../models/InvoiceModel')
 const getInvoices = (req, res) => {
 	Invoice.find()
 		.sort({ date: -1 })
+		.populate('client') // dociągnie dane klienta
 		.then(invoices => {
 			res.json(invoices)
 		})
@@ -13,21 +14,30 @@ const getInvoices = (req, res) => {
 }
 
 const addInvoice = (req, res) => {
-	const { number, date, amount } = req.body
+	const { number, date, amount, client } = req.body
 
-	if (!number || !date || !amount) {
+	if (!number || !date || !amount || !client) {
 		return res.status(400).json({ error: 'Brak wymaganych pól' })
 	}
 
-	const newInvoice = new Invoice({ number, date, amount })
+	const newInvoice = new Invoice({
+		number,
+		date,
+		amount,
+		client, // tutaj trafia ObjectId klienta
+	})
 
 	newInvoice
 		.save()
 		.then(saved => {
-			res.status(201).json(saved)
+			// opcjonalnie możesz od razu dociągnąć dane klienta
+			return saved.populate('client')
+		})
+		.then(populated => {
+			res.status(201).json(populated)
 		})
 		.catch(err => {
-			console.error('Błąd zapisu faktury:', err)
+			console.error('❌ Błąd zapisu faktury:', err)
 			res.status(500).json({ error: 'Błąd zapisu faktury' })
 		})
 }

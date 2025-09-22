@@ -39,20 +39,58 @@
 			color: vars.$color-text;
 		}
 
-		input {
+		input,
+		select {
 			padding: 0.8rem 1rem;
 			font-size: 1.6rem;
 			border: 1px solid vars.$color-border;
 			border-radius: vars.$border-radius;
+			background-color: vars.$color-white;
+			color: vars.$color-text;
+			cursor: pointer;
 
 			&:focus {
 				border-color: vars.$color-primary;
+				outline: none;
 			}
+		}
+
+		/* Custom arrow dla selecta */
+		select {
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			background: vars.$color-white
+				url("data:image/svg+xml;utf8,<svg fill='%23666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>")
+				no-repeat right 1rem center;
+			background-size: 1rem;
+			padding-right: 2.5rem;
+		}
+	}
+
+	.add-invoice__actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.2rem;
+		margin-top: 2rem;
+	}
+
+	.add-invoice__cancel {
+		padding: 1rem 2rem;
+		font-size: 1.6rem;
+		background-color: vars.$color-error;
+		color: vars.$color-white;
+		border: none;
+		border-radius: vars.$border-radius;
+		cursor: pointer;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: vars.$color-error-hover;
 		}
 	}
 
 	.add-invoice__submit {
-		align-self: flex-end;
 		padding: 1rem 2rem;
 		font-size: 1.6rem;
 		background-color: vars.$color-primary;
@@ -65,27 +103,5 @@
 		&:hover {
 			background-color: vars.$color-primary-hover;
 		}
-	}
-}
-
-.add-invoice__actions {
-	display: flex;
-	justify-content: flex-end;
-	gap: 1.2rem;
-	margin-top: 2rem;
-}
-
-.add-invoice__cancel {
-	padding: 1rem 2rem;
-	font-size: 1.6rem;
-	background-color: vars.$color-error;
-	color: vars.$color-white;
-	border: none;
-	border-radius: vars.$border-radius;
-	cursor: pointer;
-	transition: background-color 0.3s;
-
-	&:hover {
-		background-color: vars.$color-error-hover;
 	}
 }

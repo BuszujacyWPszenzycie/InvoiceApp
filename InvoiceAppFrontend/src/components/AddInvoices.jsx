@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InputAmount from './form/InputAmount'
 import InputDate from './form/InputDate'
@@ -13,7 +13,17 @@ function AddInvoice() {
 		number: '',
 		date: '',
 		amount: '',
+		client: '',
 	})
+
+	const [clients, setClients] = useState([])
+
+	useEffect(() => {
+		axios
+			.get('http://localhost:4000/api/clients')
+			.then(res => setClients(res.data))
+			.catch(err => console.error('❌ Błąd ładowania klientów:', err))
+	}, [])
 
 	const handleChange = e => {
 		setForm({ ...form, [e.target.name]: e.target.value })
@@ -26,17 +36,15 @@ function AddInvoice() {
 			.post('http://localhost:4000/api/invoices', form)
 			.then(res => {
 				console.log('✔️ Faktura zapisana:', res.data)
-				// Po sukcesie przejdź do listy faktur
 				navigate('/dashboard/invoices')
 			})
 			.catch(err => {
 				console.error('❌ Błąd zapisu faktury:', err)
-				// Możesz tu dodać obsługę błędu, np. komunikat dla użytkownika
 			})
 	}
 
 	const handleCancel = () => {
-		navigate('/dashboard') // lub '/dashboard/invoices', jak wolisz
+		navigate('/dashboard/invoices')
 	}
 
 	return (
@@ -50,6 +58,20 @@ function AddInvoice() {
 					</div>
 					<InputDate label='Data' name='date' value={form.date} onChange={handleChange} />
 					<InputAmount label='Kwota brutto' name='amount' value={form.amount} onChange={handleChange} />
+				</div>
+
+				<div className='form-row'>
+					<div className='form-column'>
+						<label>Kontrahent</label>
+						<select name='client' value={form.client} onChange={handleChange} required>
+							<option value=''>-- wybierz kontrahenta --</option>
+							{clients.map(c => (
+								<option key={c._id} value={c._id}>
+									{c.name} ({c.nip})
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
 
 				<div className='add-invoice__actions'>

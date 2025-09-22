@@ -48,6 +48,11 @@ function Invoices() {
 							<div>
 								<strong>Kwota:</strong> {invoice.amount} zł
 							</div>
+							{invoice.client && (
+								<div>
+									<strong>Kontrahent:</strong> {invoice.client.name}
+								</div>
+							)}
 						</div>
 						<button onClick={() => handleDeleteClick(invoice._id)} className='invoices__delete-btn'>
 							<FaTrash />
