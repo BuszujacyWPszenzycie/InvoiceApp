@@ -10,6 +10,65 @@
 		margin-bottom: 2rem;
 	}
 
+	&__filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.6rem;
+		margin-bottom: 2rem;
+		padding: 1.6rem;
+		background-color: #ffffff; // vars.$color-white
+		box-shadow: vars.$shadow-default;
+		border-radius: vars.$border-radius;
+
+		label {
+			display: flex;
+			flex-direction: column;
+			font-size: 1.4rem;
+			color: vars.$color-text;
+
+			input {
+				padding: 0.8rem 1rem;
+				font-size: 1.4rem;
+				border: 1px solid #dcdcdc; // vars.$color-border-light
+				border-radius: vars.$border-radius;
+				background-color: #ffffff;
+				margin-top: 0.4rem;
+
+				&:focus {
+					border-color: vars.$color-primary;
+					outline: none;
+				}
+			}
+		}
+
+		button {
+			padding: 0.8rem 1.5rem;
+			font-size: 1.4rem;
+			border-radius: vars.$border-radius;
+			border: none;
+			cursor: pointer;
+			transition: background-color 0.3s;
+
+			&:first-of-type {
+				background-color: vars.$color-primary;
+				color: #ffffff;
+
+				&:hover {
+					background-color: vars.$color-primary-hover;
+				}
+			}
+
+			&:last-of-type {
+				background-color: #dcdcdc;
+				color: vars.$color-text;
+
+				&:hover {
+					background-color: vars.$color-border-light-hover;
+				}
+			}
+		}
+	}
+
 	&__list {
 		list-style: none;
 		padding: 0;
@@ -18,36 +77,33 @@
 	}
 
 	&__item {
-		background-color: vars.$color-white;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #ffffff; // vars.$color-white
 		box-shadow: vars.$shadow-default;
 		border-radius: vars.$border-radius;
 		padding: 1.6rem;
 		font-size: 1.4rem;
 	}
-}
 
-.invoices__item {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
 
-.invoices__content {
-	display: flex;
-	flex-direction: column;
-	gap: 0.4rem;
-}
+	&__delete-btn {
+		background: none;
+		border: none;
+		color: vars.$color-error;
+		cursor: pointer;
+		font-size: 1.6rem;
+		padding: 0;
+		margin-left: 1.5rem;
 
-.invoices__delete-btn {
-	background: none;
-	border: none;
-	color: vars.$color-error;
-	cursor: pointer;
-	font-size: 1.6rem;
-	padding: 0;
-	margin-left: 1.5rem;
-
-	&:hover {
-		color: vars.$color-error-hover;
+		&:hover {
+			color: vars.$color-error-hover;
+		}
 	}
 }

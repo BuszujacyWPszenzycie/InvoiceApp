@@ -8,16 +8,40 @@ import ConfirmDialog from './ui/ConfirmDialog'
 function Invoices() {
 	const [invoices, setInvoices] = useState([])
 	const [invoiceToDelete, setInvoiceToDelete] = useState(null)
+	const [filters, setFilters] = useState({
+		startDate: '',
+		endDate: '',
+	})
+
+	const fetchInvoices = () => {
+		axios
+			.get('http://localhost:4000/api/invoices', { params: filters })
+			.then(res => setInvoices(res.data))
+			.catch(err => console.error('❌ Błąd pobierania faktur:', err))
+	}
 
 	useEffect(() => {
-		axios.get('http://localhost:4000/api/invoices').then(res => {
-			setInvoices(res.data)
-		})
+		fetchInvoices()
 	}, [])
 
-	const handleDeleteClick = id => {
-		setInvoiceToDelete(id)
+	const handleFilterChange = e => {
+		setFilters({ ...filters, [e.target.name]: e.target.value })
 	}
+
+	const applyFilter = () => {
+		fetchInvoices()
+	}
+
+	const clearFilters = () => {
+		setFilters({ startDate: '', endDate: '' })
+		// fetch z pustymi filtrami od razu
+		axios
+			.get('http://localhost:4000/api/invoices', { params: {} })
+			.then(res => setInvoices(res.data))
+			.catch(err => console.error('❌ Błąd pobierania faktur:', err))
+	}
+
+	const handleDeleteClick = id => setInvoiceToDelete(id)
 
 	const confirmDelete = () => {
 		axios
@@ -32,9 +56,33 @@ function Invoices() {
 			})
 	}
 
+	// funkcja formatująca datę
+	const formatDate = isoDate => {
+		const date = new Date(isoDate)
+		const day = String(date.getDate()).padStart(2, '0')
+		const month = String(date.getMonth() + 1).padStart(2, '0')
+		const year = date.getFullYear()
+		return `${day}.${month}.${year}`
+	}
+
 	return (
 		<div className='invoices'>
 			<h1>Lista faktur</h1>
+
+			{/* Filtry */}
+			<div className='invoices__filters'>
+				<label>
+					Od:
+					<input type='date' name='startDate' value={filters.startDate} onChange={handleFilterChange} />
+				</label>
+				<label>
+					Do:
+					<input type='date' name='endDate' value={filters.endDate} onChange={handleFilterChange} />
+				</label>
+				<button onClick={applyFilter}>Filtruj</button>
+				<button onClick={clearFilters}>Wyczyść filtry</button>
+			</div>
+
 			<ul className='invoices__list'>
 				{invoices.map(invoice => (
 					<li key={invoice._id} className='invoices__item'>
@@ -43,7 +91,7 @@ function Invoices() {
 								<strong>Numer:</strong> {invoice.number}
 							</div>
 							<div>
-								<strong>Data:</strong> {invoice.date}
+								<strong>Data:</strong> {formatDate(invoice.date)}
 							</div>
 							<div>
 								<strong>Kwota:</strong> {invoice.amount} zł

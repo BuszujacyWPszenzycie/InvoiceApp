@@ -23,7 +23,7 @@ const invoiceSchema = new mongoose.Schema(
 			required: true,
 		},
 		date: {
-			type: String, // możesz zmienić na Date, jeśli chcesz
+			type: Date, // możesz zmienić na Date, jeśli chcesz
 			required: true,
 		},
 		amount: {

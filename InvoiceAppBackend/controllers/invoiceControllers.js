@@ -1,7 +1,17 @@
 const Invoice = require('../models/InvoiceModel')
 
 const getInvoices = (req, res) => {
-	Invoice.find()
+	const { startDate, endDate } = req.query
+
+	const filter = {}
+
+	if (startDate || endDate) {
+		filter.date = {}
+		if (startDate) filter.date.$gte = new Date(startDate)
+		if (endDate) filter.date.$lte = new Date(endDate)
+	}
+
+	Invoice.find(filter)
 		.sort({ date: -1 })
 		.populate('client') // dociągnie dane klienta
 		.then(invoices => {
