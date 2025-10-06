@@ -41,6 +41,57 @@ function Invoices() {
 			.catch(err => console.error('❌ Błąd pobierania faktur:', err))
 	}
 
+	const formatDateForInput = date => {
+		const y = date.getFullYear()
+		const m = String(date.getMonth() + 1).padStart(2, '0')
+		const d = String(date.getDate()).padStart(2, '0')
+		return `${y}-${m}-${d}`
+	}
+
+	const setCurrentMonth = () => {
+		const now = new Date()
+		const start = new Date(now.getFullYear(), now.getMonth(), 1) // 1-szy dzień bieżącego miesiąca
+		const end = new Date(now.getFullYear(), now.getMonth() + 1, 0) // ostatni dzień bieżącego miesiąca
+
+		const startStr = formatDateForInput(start)
+		const endStr = formatDateForInput(end)
+
+		setFilters({ startDate: startStr, endDate: endStr })
+		fetchInvoices({ startDate: startStr, endDate: endStr })
+	}
+
+	const setPreviousMonth = () => {
+		const now = new Date()
+		const start = new Date(now.getFullYear(), now.getMonth() - 1, 1) // 1-szy dzień poprzedniego miesiąca
+		const end = new Date(now.getFullYear(), now.getMonth(), 0) // ostatni dzień poprzedniego miesiąca
+
+		const startStr = formatDateForInput(start)
+		const endStr = formatDateForInput(end)
+
+		setFilters({ startDate: startStr, endDate: endStr })
+		fetchInvoices({ startDate: startStr, endDate: endStr })
+	}
+
+	const setCurrentYear = () => {
+		const now = new Date()
+		const start = new Date(now.getFullYear(), 0, 1) // 1 stycznia bieżącego roku
+		const end = new Date(now.getFullYear(), 11, 31) // 31 grudnia bieżącego roku
+		const startStr = formatDateForInput(start)
+		const endStr = formatDateForInput(end)
+		setFilters({ startDate: startStr, endDate: endStr })
+		fetchInvoices({ startDate: startStr, endDate: endStr })
+	}
+
+	const setPreviousYear = () => {
+		const now = new Date()
+		const prevYear = now.getFullYear() - 1
+		const start = new Date(prevYear, 0, 1) // 1 stycznia poprzedniego roku
+		const end = new Date(prevYear, 11, 31) // 31 grudnia poprzedniego roku
+		const startStr = formatDateForInput(start)
+		const endStr = formatDateForInput(end)
+		setFilters({ startDate: startStr, endDate: endStr })
+		fetchInvoices({ startDate: startStr, endDate: endStr })
+	}
 	const handleDeleteClick = id => setInvoiceToDelete(id)
 
 	const confirmDelete = () => {
@@ -81,6 +132,16 @@ function Invoices() {
 				</label>
 				<button onClick={applyFilter}>Filtruj</button>
 				<button onClick={clearFilters}>Wyczyść filtry</button>
+			</div>
+
+			<div className='invoices__quick-filters'>
+				<span className='invoices__quick-label'>Szybkie filtry:</span>
+				<div className='invoices__quick-buttons'>
+					<button onClick={setCurrentMonth}>Bieżący miesiąc</button>
+					<button onClick={setPreviousMonth}>Poprzedni miesiąc</button>
+					<button onClick={setCurrentYear}>Bieżący rok</button>
+					<button onClick={setPreviousYear}>Poprzedni rok</button>
+				</div>
 			</div>
 
 			<ul className='invoices__list'>
