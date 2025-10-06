@@ -40,6 +40,11 @@
 			font-size: 1.4rem;
 			margin-bottom: 0.8rem;
 			color: vars.$color-text;
+
+			.select-wrapper {
+				position: relative;
+				width: 100%; // wrapper zajmuje 100% kolumny
+			}
 		}
 
 		input,
@@ -59,6 +64,8 @@
 		}
 
 		select {
+			width: 100%; // wymusza dopasowanie do wrappera
+			box-sizing: border-box; // uwzględnia padding i border
 			appearance: none;
 			-webkit-appearance: none;
 			-moz-appearance: none;
@@ -67,6 +74,10 @@
 				no-repeat right 1rem center;
 			background-size: 1rem;
 			padding-right: 2.5rem;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 

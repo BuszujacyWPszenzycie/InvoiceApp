@@ -1,4 +1,5 @@
 const Client = require('../models/Client')
+const axios = require('axios')
 
 const getClients = (req, res) => {
 	Client.find()
@@ -37,4 +38,36 @@ const deleteClient = (req, res) => {
 		.catch(err => res.status(500).json({ error: 'Błąd usuwania klienta' }))
 }
 
-module.exports = { addClient, getClients, deleteClient }
+const getVatData = (req, res) => {
+	console.log('Wywołano getVatData z NIP:', req.params.nip)
+	const { nip } = req.params
+
+	if (!nip) {
+		return res.status(400).json({ error: 'NIP jest wymagany' })
+	}
+
+	const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
+	const url = `https://wl-api.mf.gov.pl/api/search/nip/${nip}?date=${today}`
+
+	axios
+		.get(url)
+		.then(response => {
+			const subject = response.data.result.subject
+
+			const address = subject.workingAddress || subject.residenceAddress || ''
+
+			const data = {
+				name: subject.name || '',
+				address: address,
+				vatStatus: subject.statusVat || '',
+			}
+			console.log('Dane pobrane z MF:', data)
+			res.json(data)
+		})
+		.catch(error => {
+			console.error('Błąd pobierania danych z Białej Listy VAT:', error.message)
+			res.status(500).json({ error: 'Nie udało się pobrać danych z Białej Listy VAT' })
+		})
+}
+
+module.exports = { addClient, getClients, deleteClient, getVatData }

@@ -47,6 +47,32 @@ function AddClient() {
 					<input type='text' name='nip' value={formData.nip} onChange={handleChange} />
 				</label>
 				<label>
+					NIP
+					<div style={{ display: 'flex', gap: '0.5rem' }}>
+						<input type='text' name='nip' value={formData.nip} onChange={handleChange} />
+						<Button
+							type='button'
+							variant='secondary'
+							onClick={async () => {
+								if (!formData.nip) return
+								try {
+									const res = await axios.get(`http://localhost:4000/api/clients/vat/${formData.nip}`)
+									setFormData({
+										...formData,
+										name: res.data.name,
+										address: res.data.address,
+									})
+								} catch (err) {
+									console.error('Błąd pobierania danych VAT:', err)
+									alert('Nie udało się pobrać danych z Białej Listy VAT')
+								}
+							}}
+						>
+							Pobierz z Białej Listy
+						</Button>
+					</div>
+				</label>
+				<label>
 					Adres
 					<input type='text' name='address' value={formData.address} onChange={handleChange} />
 				</label>
